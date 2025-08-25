@@ -1,0 +1,6 @@
+export const HOME_FETCH_POKEDEXS_REQUEST =
+  'pokedex/HOME_FETCH_POKEDEXS_REQUEST' as const;
+export const HOME_FETCH_POKEDEXS_SUCCESS =
+  'pokedex/HOME_FETCH_POKEDEXS_SUCCESS' as const;
+export const HOME_FETCH_POKEDEXS_FAILURE =
+  'pokedex/HOME_FETCH_POKEDEXS_FAILURE' as const;

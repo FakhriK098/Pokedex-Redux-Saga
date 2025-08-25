@@ -1,5 +1,22 @@
 {
   "extends": "@react-native/typescript-config",
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["**/node_modules", "**/Pods"]
+  "exclude": ["**/node_modules", "**/Pods"],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@screens/*": ["src/screens/*"],
+      "@utils/*": ["src/utils/*"],
+      "@models/*": ["src/core/models/*"],
+      "@api": ["src/core/api/index.ts"],
+      "@features/*": ["src/features/*"],
+      "@repository/*": ["src/core/repository/*"],
+      "@types/*": ["src/types/*"],
+      "@themes/*": ["src/themes/*"],
+      "@images": ["src/assets/images"]
+    }
+  }
 }
