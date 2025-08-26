@@ -29,8 +29,9 @@ export const searchClearQuery = () => ({
 });
 
 // Tipe util opsional
-export type HomeActions =
+export type SearchActions =
   | ReturnType<typeof fetchPokedexsRequest>
   | ReturnType<typeof fetchPokedexsSuccess>
   | ReturnType<typeof fetchPokedexFailure>
-  | ReturnType<typeof searchSetQuery>;
+  | ReturnType<typeof searchSetQuery>
+  | ReturnType<typeof searchClearQuery>;

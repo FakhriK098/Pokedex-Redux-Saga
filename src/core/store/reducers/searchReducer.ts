@@ -1,3 +1,4 @@
+import { SearchActions } from '@actions/searchActions';
 import {
   SEARCH_CLEAR_QUERY,
   SEARCH_FETCH_POKEDEXS_FAILURE,
@@ -25,7 +26,7 @@ const initialState: SearchState = {
 
 export default function searchReducer(
   state = initialState,
-  action: any,
+  action: SearchActions,
 ): SearchState {
   switch (action.type) {
     case SEARCH_FETCH_POKEDEXS_REQUEST:

@@ -14,8 +14,8 @@ export class HomePresenter implements IHomePresenter {
   onSearchPress(): void {
     this.view?.navigateToSearch();
   }
-  attach(view: IHomeView) {
-    this.view = view;
+  attach(v: IHomeView) {
+    this.view = v;
   }
   detach(): void {
     this.view = undefined;

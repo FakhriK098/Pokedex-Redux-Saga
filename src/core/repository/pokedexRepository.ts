@@ -1,9 +1,11 @@
 import api from '@api';
 import {
   ColorResponse,
+  EvolutionResponse,
   MoveResponse,
   Pokemon,
   PokemonListResponse,
+  SpeciesResponse,
   TypeResponse,
 } from '@models/pokedex';
 import { getId } from '@utils/strings';
@@ -65,4 +67,17 @@ export const speciesPokemon = async (item: Pokemon): Promise<Pokemon> => {
     colors: { name: res.data.color.name },
     evolutionChain: { url: res.data.evolution_chain.url },
   };
+};
+
+export const speciesDetailPokemon = async (
+  url: string,
+): Promise<SpeciesResponse> => {
+  const res: AxiosResponse<SpeciesResponse> = await api.get(url);
+  return res.data;
+};
+export const evolutionPokemon = async (
+  url: string,
+): Promise<EvolutionResponse> => {
+  const res: AxiosResponse<EvolutionResponse> = await api.get(url);
+  return res.data;
 };

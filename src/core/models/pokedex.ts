@@ -109,3 +109,17 @@ export interface IFilter {
   typeSelected: string | null;
   colorSelected: string | null;
 }
+
+export interface SpeciesResponse {
+  evolution_chain: {
+    url: string;
+  };
+  color: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface EvolutionResponse {
+  chain: Evolves;
+}

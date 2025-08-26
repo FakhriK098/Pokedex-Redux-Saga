@@ -3,6 +3,7 @@ import { RootStackParamList } from './types';
 import { NavigationContainer } from '@react-navigation/native';
 import HomePage from '@features/home/HomePage';
 import SearchPage from '@features/search/SearchPage';
+import DetailPage from '@features/detail/DetailPage';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -20,12 +21,12 @@ const AppNavigator = () => {
           component={SearchPage}
           options={{ title: 'Search Pokemon' }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Detail"
           component={DetailPage}
           options={{ title: 'Pokemon Detail' }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Compare"
           component={ComparePage}
           options={{ title: 'Compare Pokemon' }}
