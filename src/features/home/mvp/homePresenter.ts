@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { HomeState, IHomePresenter, IHomeView } from './homeContract';
-import { fetchPokedexsRequest } from '../actions';
+import { fetchPokedexsRequest } from '@actions/homeActions';
 
 export class HomePresenter implements IHomePresenter {
   private view?: IHomeView;
@@ -10,6 +10,9 @@ export class HomePresenter implements IHomePresenter {
   constructor(params: { dispatch: Dispatch; getState: () => HomeState }) {
     this.dispatch = params.dispatch;
     this.getState = params.getState;
+  }
+  onSearchPress(): void {
+    this.view?.navigateToSearch();
   }
   attach(view: IHomeView) {
     this.view = view;

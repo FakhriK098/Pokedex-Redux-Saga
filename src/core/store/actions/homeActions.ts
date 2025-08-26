@@ -1,7 +1,9 @@
+import {
+  HOME_FETCH_POKEDEXS_FAILURE,
+  HOME_FETCH_POKEDEXS_REQUEST,
+  HOME_FETCH_POKEDEXS_SUCCESS,
+} from '@actionTypes/homeActionTypes';
 import { Pokemon } from '@models/pokedex';
-import { HOME_FETCH_POKEDEXS_REQUEST } from './actionTypes';
-import { HOME_FETCH_POKEDEXS_SUCCESS } from './actionTypes';
-import { HOME_FETCH_POKEDEXS_FAILURE } from './actionTypes';
 
 export const fetchPokedexsRequest = (payload: { offset: number }) => ({
   type: HOME_FETCH_POKEDEXS_REQUEST,

@@ -9,6 +9,7 @@ export type HomeState = {
 
 export interface IHomeView {
   navigateToDetail(pokemonId: number): void;
+  navigateToSearch(): void;
 }
 
 export interface IHomePresenter {
@@ -18,4 +19,5 @@ export interface IHomePresenter {
   onRefresh(): void;
   onEndReached(offset: number): void;
   onItemPress(id: number): void;
+  onSearchPress(): void;
 }

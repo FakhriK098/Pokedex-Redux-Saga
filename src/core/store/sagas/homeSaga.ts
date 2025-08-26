@@ -1,16 +1,16 @@
 import { Pokemon, PokemonListResponse } from '@models/pokedex';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import {
-  fetchPokedexFailure,
-  fetchPokedexsRequest,
-  fetchPokedexsSuccess,
-} from './actions';
-import { HOME_FETCH_POKEDEXS_REQUEST } from './actionTypes';
-import {
   getPokemonById,
   getPokemonList,
   speciesPokemon,
 } from '@repository/pokedexRepository';
+import {
+  fetchPokedexFailure,
+  fetchPokedexsRequest,
+  fetchPokedexsSuccess,
+} from '@actions/homeActions';
+import { HOME_FETCH_POKEDEXS_REQUEST } from '@actionTypes/homeActionTypes';
 
 export function* fetchPokedexs(
   action: ReturnType<typeof fetchPokedexsRequest>,

@@ -1,10 +1,10 @@
-import { Pokemon, PokemonListResponse } from '@models/pokedex';
+import { HomeActions } from '@actions/homeActions';
 import {
   HOME_FETCH_POKEDEXS_FAILURE,
   HOME_FETCH_POKEDEXS_REQUEST,
   HOME_FETCH_POKEDEXS_SUCCESS,
-} from './actionTypes';
-import { HomeActions } from './actions';
+} from '@actionTypes/homeActionTypes';
+import { Pokemon, PokemonListResponse } from '@models/pokedex';
 
 interface HomeState {
   pokemonList: Pokemon[];

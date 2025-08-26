@@ -16,7 +16,12 @@
       "@repository/*": ["src/core/repository/*"],
       "@types/*": ["src/types/*"],
       "@themes/*": ["src/themes/*"],
-      "@images": ["src/assets/images"]
+      "@images": ["src/assets/images"],
+      "@actions/*": ["src/core/store/actions/*"],
+      "@actionTypes/*": ["src/core/store/actionTypes/*"],
+      "@reducers/*": ["src/core/store/reducers/*"],
+      "@sagas/*": ["src/core/store/sagas/*"],
+      "@selectors/*": ["src/core/store/selectors/*"]
     }
   }
 }

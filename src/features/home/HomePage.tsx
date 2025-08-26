@@ -12,15 +12,15 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/app/rootReducer';
 import { useNavigation } from '@react-navigation/native';
-import { IHomeView } from '../mvp/homeContract';
 import { RootNavigationProps } from 'src/navigation/types';
-import { HomePresenter } from '../mvp/homePresenter';
 import { Pokemon } from '@models/pokedex';
 import CardPokemon from './components/CardPokemon';
 import EmptyContainer from './components/EmptyContainer';
 import { colors } from '@themes/colors';
 import CounteFilter from './components/CounteFilter';
 import images from '@images';
+import { HomePresenter } from './mvp/homePresenter';
+import { IHomeView } from './mvp/homeContract';
 
 const HomePage = () => {
   const { navigate } = useNavigation<RootNavigationProps>();
@@ -34,6 +34,7 @@ const HomePage = () => {
   const viewImpl = useMemo<IHomeView>(
     () => ({
       navigateToDetail: id => navigate('Detail', { pokemonId: String(id) }),
+      navigateToSearch: () => navigate('Search'),
     }),
     [navigate],
   );
@@ -62,6 +63,10 @@ const HomePage = () => {
     return () => presenter.detach();
   }, [viewImpl]);
 
+  const handleSearch = () => {
+    presenterRef.current!.onSearchPress();
+  };
+
   const renderEmpty = () => {
     return <EmptyContainer />;
   };
@@ -73,8 +78,7 @@ const HomePage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        {/* <Pressable style={styles.searchContainer} onPress={handleSearch}> */}
-        <Pressable style={styles.searchContainer}>
+        <Pressable style={styles.searchContainer} onPress={handleSearch}>
           <Text style={styles.textSearch}>Search</Text>
         </Pressable>
         {/* <Pressable style={styles.filterContainer} onPress={handleFilter}> */}
@@ -98,7 +102,7 @@ const HomePage = () => {
         onMomentumScrollBegin={() => {
           canLoadMoreRef.current = true;
         }}
-        // pull to refresh
+        showsVerticalScrollIndicator={false}
         refreshing={state.loading}
         onRefresh={() => presenterRef.current?.onRefresh()}
         ListEmptyComponent={renderEmpty}
