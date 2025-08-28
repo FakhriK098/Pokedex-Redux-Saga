@@ -10,6 +10,7 @@ export type HomeState = {
 export interface IHomeView {
   navigateToDetail(pokemonId: number): void;
   navigateToSearch(): void;
+  openModalFilter(): void;
 }
 
 export interface IHomePresenter {
@@ -20,4 +21,5 @@ export interface IHomePresenter {
   onEndReached(offset: number): void;
   onItemPress(id: number): void;
   onSearchPress(): void;
+  onFilterPress(): void;
 }

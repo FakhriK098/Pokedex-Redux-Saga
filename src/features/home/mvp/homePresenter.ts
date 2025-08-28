@@ -11,6 +11,9 @@ export class HomePresenter implements IHomePresenter {
     this.dispatch = params.dispatch;
     this.getState = params.getState;
   }
+  onFilterPress(): void {
+    this.view?.openModalFilter();
+  }
   onSearchPress(): void {
     this.view?.navigateToSearch();
   }

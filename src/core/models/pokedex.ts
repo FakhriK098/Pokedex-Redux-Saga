@@ -123,3 +123,9 @@ export interface SpeciesResponse {
 export interface EvolutionResponse {
   chain: Evolves;
 }
+
+export interface FilterPokemon {
+  types: PokemonListResponse;
+  moves: PokemonListResponse;
+  colors: PokemonListResponse;
+}

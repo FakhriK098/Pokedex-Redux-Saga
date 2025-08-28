@@ -21,6 +21,8 @@ import CounteFilter from './components/CounteFilter';
 import images from '@images';
 import { HomePresenter } from './mvp/homePresenter';
 import { IHomeView } from './mvp/homeContract';
+import ModalFilter from '@features/modalFilter/ModalFilter';
+import { Modalize } from 'react-native-modalize';
 
 const HomePage = () => {
   const { navigate } = useNavigation<RootNavigationProps>();
@@ -30,11 +32,14 @@ const HomePage = () => {
   const presenterRef = useRef<HomePresenter | null>(null);
   // avoid duplicate onEndReached calls
   const canLoadMoreRef = useRef(true);
+  const modalFilterRef = useRef<Modalize>(null);
+
   // adapter untuk kontrak View
   const viewImpl = useMemo<IHomeView>(
     () => ({
       navigateToDetail: id => navigate('Detail', { pokemonId: String(id) }),
       navigateToSearch: () => navigate('Search'),
+      openModalFilter: () => modalFilterRef.current?.open(),
     }),
     [navigate],
   );
@@ -63,8 +68,20 @@ const HomePage = () => {
     return () => presenter.detach();
   }, [viewImpl]);
 
+  const data = useMemo(() => {
+    if (state.filterPokemonList.length > 0) {
+      return state.filterPokemonList;
+    }
+
+    return state.pokemonList;
+  }, [state.filterPokemonList, state.pokemonList]);
+
   const handleSearch = () => {
     presenterRef.current!.onSearchPress();
+  };
+
+  const handleFilter = () => {
+    presenterRef.current?.onFilterPress();
   };
 
   const renderEmpty = () => {
@@ -81,14 +98,13 @@ const HomePage = () => {
         <Pressable style={styles.searchContainer} onPress={handleSearch}>
           <Text style={styles.textSearch}>Search</Text>
         </Pressable>
-        {/* <Pressable style={styles.filterContainer} onPress={handleFilter}> */}
-        <Pressable style={styles.filterContainer}>
-          <CounteFilter count={0} />
+        <Pressable style={styles.filterContainer} onPress={handleFilter}>
+          <CounteFilter count={state.countFilter} />
           <Image source={images.filter} style={styles.imageFilter} />
         </Pressable>
       </View>
       <FlatList
-        data={state.pokemonList}
+        data={data}
         renderItem={renderItem}
         numColumns={2}
         keyExtractor={(item, index) => `pokemon-${item.id}-${index}`}
@@ -114,6 +130,7 @@ const HomePage = () => {
           ) : null
         }
       />
+      <ModalFilter modalRef={modalFilterRef} />
     </SafeAreaView>
   );
 };
