@@ -1,97 +1,117 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+**Pokedex (React Native)**
 
-# Getting Started
+Browse, search, and filter Pokémon using the PokéAPI. Built with React Native, TypeScript, Redux, and Redux-Saga.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- **Home grid**: Infinite scroll list with pull-to-refresh.
+- **Search**: Navigate to search and quickly find Pokémon by name.
+- **Detail view**: Stats, abilities, types, sprites, and evolution chain.
+- **Filters**: Filter by type, move, and color via a bottom sheet modal.
+- **Theming helpers**: Dynamic color contrast for better readability.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Tech Stack
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- **React Native 0.81** + **React 19** + **TypeScript**
+- **Navigation**: `@react-navigation/native` + native stack
+- **State**: `redux` + `redux-saga`
+- **Networking**: `axios`
+- **Env**: `react-native-dotenv`
+- **UI utils**: `react-native-modalize`, `tinycolor2`
+
+## Prerequisites
+
+- Node.js >= 18 and a package manager (`yarn` or `npm`)
+- React Native environment set up (Android Studio and/or Xcode)
+- Ruby + Bundler for iOS (CocoaPods)
+
+## Quick Start
+
+1) Install dependencies
 
 ```sh
-# Using npm
-npm start
+yarn
+# or
+npm install
+```
 
-# OR using Yarn
+2) Configure environment variables
+
+Create a `.env` file in the project root (one already exists in development) with at least:
+
+```env
+BASE_URL=https://pokeapi.co/api/v2
+BASE_URL_IMAGE=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/
+```
+
+These are read via `@env` (see `babel.config.js`).
+
+3) Start Metro
+
+```sh
 yarn start
+# or
+npm start
 ```
 
-## Step 2: Build and run your app
+4) Run the app
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
+- Android
 
 ```sh
-# Using npm
-npm run android
-
-# OR using Yarn
 yarn android
+# or
+npm run android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+- iOS (first time per machine or after native deps change)
 
 ```sh
 bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
+cd ios && bundle exec pod install && cd -
 yarn ios
+# or
+npm run ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Scripts
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+- `start`: Start Metro bundler
+- `android` / `ios`: Build and run the app
+- `lint`: Run ESLint
+- `test`: Run Jest tests
 
-## Step 3: Modify your app
+## Project Structure
 
-Now that you have successfully run the app, let's make changes!
+```
+src/
+  app/            # store setup (redux + saga)
+  core/           # api, models, repository, store (actions, reducers, sagas)
+  features/       # screens (home, search, detail, modalFilter)
+  navigation/     # AppNavigator + types
+  components/     # shared UI components
+  themes/         # colors and theme helpers
+  utils/          # helpers (e.g., id parsing)
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+Key files:
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+- `src/core/api/index.ts`: Axios instance using `BASE_URL` from `.env`
+- `src/core/repository/pokedexRepository.ts`: PokéAPI calls and adapters
+- `src/app/store.ts`: Redux store with saga middleware
+- `src/navigation/AppNavigator.tsx`: Routes and screen registration
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## Notes
 
-## Congratulations! :tada:
+- Module aliases are configured in `babel.config.js` via `babel-plugin-module-resolver`.
+- Environment variables are loaded using `react-native-dotenv` with module name `@env`.
 
-You've successfully run and modified your React Native App. :partying_face:
+## Troubleshooting
 
-### Now what?
+- Clear Metro cache: `yarn start --reset-cache`
+- Android build issues: `cd android && ./gradlew clean && cd -`
+- iOS pod issues: `cd ios && bundle exec pod repo update && bundle exec pod install && cd -`
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+## License
 
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+This project is for learning/demo purposes. Add a license if you plan to distribute.
